@@ -13,16 +13,17 @@ app.get('/get-record-holders', async(req, res) => {
         res.json(recordHolders.rows)
     } catch (e) {
         res.status(500).json({message: 'Something went wrong'})
-    }
+    }  
 })
 
 app.post('/post-score', async(req, res) => {
     try {
         const {name, score} = req.body
-        await db.query(`INSERT INTO record_holders (name, score)
-        VALUES($1, $2) RETURNING *`, [name, score])
+        await db.query(`INSERT INTO "record_holders" ("name", "score")
+        VALUES($1, $2)`, [name, score])
         res.json({success: true})
     } catch (e) {
+        console.log(e)
         res.status(500).json({message: 'Something went wrong'})
     }
 })
