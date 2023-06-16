@@ -23,7 +23,6 @@ app.post('/post-score', async(req, res) => {
         VALUES($1, $2)`, [name, score])
         res.json({success: true})
     } catch (e) {
-        console.log(e)
         res.status(500).json({message: 'Something went wrong'})
     }
 })
